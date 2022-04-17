@@ -2,7 +2,10 @@
 
 export default (promises) => {
 
+	if (typeof promises === 'undefined') throw new TypeError('No promises was provided.');
 	if (!Array.isArray(promises)) promises = [promises];
+
+	if (promises.length === 0) return Promise.resolve([]);
 
 	promises.forEach((promise) => {
 		if (typeof (promise || {}).then !== 'function') throw new Error('Promise is not thenable.');

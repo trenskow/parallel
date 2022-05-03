@@ -28,7 +28,7 @@ describe('parallel', () => {
 		const called = [false, false, false];
 		return (async () => {
 			await expect(parallel([0, 1, 2].map(async (item) => {
-				await wait(`${item}s`);
+				await wait(`${item * 100}ms`);
 				called[item] = true;
 				return item + 1;
 			}))).to.eventually.be.eql([1, 2, 3]);
@@ -41,7 +41,7 @@ describe('parallel', () => {
 		return (async () => {
 			await expect(parallel([0, 1, 2].map(async (item) => {
 				if (item === 1) throw new Error('Some error');
-				await wait(`${item}s`);
+				await wait(`${item * 100}ms`);
 				called[item] = true;
 				return item + 1;
 			}))).to.eventually.be.rejectedWith('Some error');

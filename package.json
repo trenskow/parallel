@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/trenskow/parallel#readme",
   "devDependencies": {
-    "@trenskow/wait": "^1.2.5",
+    "@trenskow/wait": "^1.2.6",
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
     "eslint": "^8.13.0",

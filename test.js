@@ -1,17 +1,15 @@
 // Created 2022 by Kristian Trenskow
 
-import chai from 'chai';
+import { use as chaiUse, expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import wait from '@trenskow/wait';
 
-chai.use(chaiAsPromised);
-
-const { expect } = chai;
+chaiUse(chaiAsPromised);
 
 import parallel from './index.js';
 
 describe('parallel', () => {
-	
+
 	it ('should throw an error if promises are not provided.', () => {
 		expect(() => parallel(123)).to.throw('Promise is not thenable.');
 	});

@@ -10,10 +10,6 @@ import parallel from './index.js';
 
 describe('parallel', () => {
 
-	it ('should throw an error if promises are not provided.', () => {
-		expect(() => parallel(123)).to.throw('Promise is not thenable.');
-	});
-
 	it ('should throw an error if no promises are provided.', () => {
 		expect(() => parallel()).to.throw('No promises was provided.');
 	});
@@ -45,6 +41,10 @@ describe('parallel', () => {
 			}))).to.eventually.be.rejectedWith('Some error');
 			expect(called).to.eql([true, false, true]);
 		})();
+	});
+
+	it ('should eventually come back with [1, 2, 3] when non-promises', async () => {
+		await expect(parallel([0, 1, 2])).to.eventually.eql([0, 1, 2]);
 	});
 
 });

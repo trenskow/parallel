@@ -1,4 +1,4 @@
-// Created 2022 by Kristian Trenskow
+// Created 2022-2026 by Kristian Trenskow
 
 export default (promises) => {
 
@@ -7,50 +7,41 @@ export default (promises) => {
 
 	if (promises.length === 0) return Promise.resolve([]);
 
-	promises.forEach((promise) => {
-		if (typeof (promise || {}).then !== 'function') throw new Error('Promise is not thenable.');
-	});
-
-	let results = Array(promises.length).fill({});
+	let results = Array(promises.length);
+	let rejection;
+	let completed = 0;
 
 	return new Promise((resolve, reject) => {
 
 		const evaluate = () => {
 
-			if (!results) return;
+			if (completed === promises.length) {
 
-			if (results.filter(({ status }) => status).length === promises.length) {
-				
-				try {
-					resolve(results.map((result) => {
-						if (result.status === 'rejected') throw result.reason;
-						return result.value;
-					}));
-				} catch (error) {
-					reject(error);
+				if (typeof rejection !== 'undefined') {
+					return reject(rejection);
 				}
 
-				results = undefined;
+				resolve(results);
 
 			}
 
 		};
 
-		promises.forEach((promise, idx) => {
-			promise
-				.then((value) => {
-					results[idx] = {
-						status: 'resolved',
-						value
-					};
-				}, (reason) => {
-					results[idx] = {
-						status: 'rejected',
-						reason
-					};
-				})
-				.then(evaluate);
-		});
+		promises
+			.forEach((promise, idx) => {
+				Promise.resolve(promise)
+					.then((value) => {
+						results[idx] = value;
+					})
+					.catch((reason) => {
+						results[idx] = undefined;
+						rejection = rejection || reason;
+					})
+					.finally(() => {
+						completed++;
+					})
+					.then(evaluate);
+			});
 
 	});
 

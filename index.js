@@ -1,4 +1,10 @@
-// Created 2022-2026 by Kristian Trenskow
+//
+// index.js
+// @trenskow/parallel
+//
+// Created by Kristian Trenskow on 2022/04/10
+// For license see LICENSE.
+//
 
 export default (promises) => {
 

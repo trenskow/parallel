@@ -1,4 +1,10 @@
-// Created 2022 by Kristian Trenskow
+//
+// test.js
+// @trenskow/parallel
+//
+// Created by Kristian Trenskow on 2022/04/10
+// For license see LICENSE.
+//
 
 import { use as chaiUse, expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';

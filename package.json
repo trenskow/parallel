@@ -4,6 +4,7 @@
 	"description": "A small library for doing async tasks in parallel.",
 	"main": "index.js",
 	"type": "module",
+	"types": "index.d.ts",
 	"scripts": {
 		"test": "./node_modules/mocha/bin/mocha.js test.js"
 	},

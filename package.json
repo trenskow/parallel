@@ -1,6 +1,6 @@
 {
 	"name": "@trenskow/parallel",
-	"version": "0.1.151",
+	"version": "0.1.152",
 	"description": "A small library for doing async tasks in parallel.",
 	"main": "index.js",
 	"type": "module",
